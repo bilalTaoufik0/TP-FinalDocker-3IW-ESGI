@@ -2,10 +2,10 @@ services:
   db:
     image: mysql:8.0
     environment:
-      MYSQL_DATABASE: ${DB_DATABASE}
-      MYSQL_USER: ${DB_USERNAME}
-      MYSQL_PASSWORD: ${DB_PASSWORD}
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: example_app
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: root
     volumes:
       - db_data:/var/lib/mysql
     ports:
@@ -14,6 +14,7 @@ services:
   php1:
     build: ./php
     environment:
+      PRIMARY: "1"
       SERVER_MESSAGE: "Serveur 1"
     volumes:
       - ./:/var/www/html
@@ -23,6 +24,7 @@ services:
   php2:
     build: ./php
     environment:
+      PRIMARY: "0"
       SERVER_MESSAGE: "Serveur 2"
     volumes:
       - ./:/var/www/html

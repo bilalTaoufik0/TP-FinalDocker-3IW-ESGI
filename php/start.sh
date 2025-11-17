@@ -20,6 +20,7 @@ fi
 
 # Permissions (best effort)
 mkdir -p storage bootstrap/cache
+chmod -R ug+rw storage/bootstrap/cache || true
 chmod -R ug+rw storage bootstrap/cache || true
 
 exec php-fpm
