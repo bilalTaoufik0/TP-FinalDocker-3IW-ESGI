@@ -4,8 +4,10 @@ cd /var/www/html
 
 # Composer (si vendor absent)
 if [ -f composer.json ] && [ ! -d vendor ]; then
-  composer install --no-interaction --prefer-dist --no-progress
+  composer install --no-interaction --prefer-dist --no-progress \
+  || composer update --no-interaction --prefer-dist --with-all-dependencies || true
 fi
+
 
 # Génère la clé si manquante
 if [ -f artisan ] && ! grep -q '^APP_KEY=base64:' .env; then
