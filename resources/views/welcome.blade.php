@@ -202,7 +202,7 @@
             <figure class="avatar"><img src="{{ asset('images/bilal.png') }}" alt="Bilal Taoufik"></figure>
             <div>
               <h3 class="name">Bilal Taoufik</h3>
-              <small style="color:var(--muted)">Docker-compose & Blade</small>
+              <small style="color:var(--muted)">Docker-compose & Dockerfile</small>
             </div>
           </div>
           <p class="desc">Mise en place du Docker-compose + Dockerfile</p>
@@ -219,10 +219,10 @@
             <figure class="avatar"><img src="{{ asset('images/matheo.png') }}" alt="Matheo"></figure>
             <div>
               <h3 class="name">Matheo</h3>
-              <small style="color:var(--muted)">Dockerfile & scripts .sh</small>
+              <small style="color:var(--muted)">Start.sh</small>
             </div>
           </div>
-          <p class="desc">Mise en place des nginx</p>
+          <p class="desc">Mise en place de l'automatisation</p>
         </div>
         <span class="dot" aria-hidden="true"></span>
       </div>
@@ -234,10 +234,10 @@
             <figure class="avatar"><img src="{{ asset('images/zak.jpg') }}" alt="Zakaraia"></figure>
             <div>
               <h3 class="name">Zakaria</h3>
-              <small style="color:var(--muted)">Nginx & .env</small>
+              <small style="color:var(--muted)">Nginx</small>
             </div>
           </div>
-          <p class="desc">Mise en place de l'automatisation</p>
+          <p class="desc">Mise en place des Nginx</p>
         </div>
         <div class="titem__spacer"></div>
         <span class="dot" aria-hidden="true"></span>
