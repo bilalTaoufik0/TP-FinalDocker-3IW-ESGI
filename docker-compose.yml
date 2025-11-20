@@ -2,10 +2,10 @@ services:
   db:
     image: mysql:8.0
     environment:
-      MYSQL_DATABASE: example_app
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
     volumes:
       - db_data:/var/lib/mysql
     ports:
@@ -51,5 +51,24 @@ services:
     depends_on:
       - php2
 
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: mailpit
+    restart: unless-stopped
+    ports:
+      - "8025:8025"          
+      - "1025:1025"           
+    environment:
+      MP_MAX_MESSAGES: 5000
+
+
+      
 volumes:
   db_data:
+
+
+
+
+
+#cmd pour voir les utilisateurs enregistrer dans la table : 
+#docker compose exec db sh -lc   'mysql -uuser -ppassword example_app -e "SELECT id, name, email FROM users;"'

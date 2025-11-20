@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\WelcomeUserMail;
+
 class RegisteredUserController extends Controller
 {
     /**
@@ -32,23 +35,30 @@ class RegisteredUserController extends Controller
      * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request)
-    {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
+{
+    // 1) Validation d'abord
+    $validated = $request->validate([
+        'name' => ['required', 'string', 'max:255'],
+        'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+        'password' => ['required', 'confirmed', Rules\Password::defaults()],
+    ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+    // 2) Création de l’utilisateur
+    $user = User::create([
+        'name' => $validated['name'],
+        'email' => $validated['email'],
+        'password' => Hash::make($validated['password']),
+    ]);
 
-        event(new Registered($user));
+    // 3) Event Laravel (email de vérification si tu l’utilises)
+    event(new Registered($user));
 
-        Auth::login($user);
+    // 4) Mail de bienvenue
+    Mail::to($user->email)->send(new WelcomeUserMail($user));
 
-        return redirect(RouteServiceProvider::HOME);
-    }
+    // 5) Login + redirect
+    Auth::login($user);
+
+    return redirect(RouteServiceProvider::HOME);
+}
 }
