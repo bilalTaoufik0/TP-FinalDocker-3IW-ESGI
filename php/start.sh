@@ -1,13 +1,12 @@
 #!/bin/sh
 set -eu
-
 cd /var/www/html
 
 # Dossiers obligatoires
 mkdir -p storage/logs storage/framework/{cache,sessions,views} bootstrap/cache
 
 # Dépendances PHP
-if [ ! -d vendor ]; then
+if [ -f composer.json ] && [ ! -d vendor ]; then
     composer install --no-interaction
 fi
 
