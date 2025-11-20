@@ -1,6 +1,5 @@
 #!/bin/sh
 set -eu
-
 cd /var/www/html || exit 0
 
 # Créer les dossiers nécessaires
@@ -29,7 +28,7 @@ fi
 
 # Migrations (une seule fois)
 if [ -f artisan ] && [ ! -f storage/.migrated ]; then
-    php artisan migrate:fresh --seed --force || true
+    php artisan migrate --force || true
     touch storage/.migrated
 fi
 
